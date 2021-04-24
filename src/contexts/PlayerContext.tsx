@@ -1,4 +1,11 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useContext,
+  useState,
+} from "react";
 
 type Episode = {
   title: string;
@@ -25,6 +32,8 @@ type PlayerContextData = {
   toggleShuffle: () => void;
   isShuffling: boolean;
   clearPlayerState: () => void;
+  darkMode: boolean;
+  setDarkMode: Dispatch<SetStateAction<boolean>>;
 };
 
 export const PlayerContext = createContext({} as PlayerContextData);
@@ -95,6 +104,8 @@ export function PlayerContextProvider({
     }
   }
 
+  const [darkMode, setDarkMode] = useState(false);
+
   return (
     <PlayerContext.Provider
       value={{
@@ -114,6 +125,8 @@ export function PlayerContextProvider({
         toggleShuffle,
         isShuffling,
         clearPlayerState,
+        darkMode,
+        setDarkMode,
       }}
     >
       {children}
